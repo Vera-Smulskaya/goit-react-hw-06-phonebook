@@ -1,3 +1,4 @@
+import React from 'react';
 import css from './ContactListItem.module.css';
 
 const ContactListItem = ({ contact, deleteContact }) => {

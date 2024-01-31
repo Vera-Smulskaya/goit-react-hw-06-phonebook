@@ -1,3 +1,4 @@
+import React from 'react';
 import css from './Title.module.css';
 
 const Filter = ({ children }) => {

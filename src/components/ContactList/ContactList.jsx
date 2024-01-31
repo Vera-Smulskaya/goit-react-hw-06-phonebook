@@ -1,3 +1,4 @@
+import React from 'react';
 import css from './ContactList.module.css';
 import Title from '../Title/Title';
 import ContactListItem from 'components/ContactListItem/ContactListItem';
