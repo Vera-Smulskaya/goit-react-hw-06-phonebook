@@ -7,6 +7,7 @@ import ContactList from './ContactList/ContactList';
 // import Filter from './Filter/Filter';
 import Section from './Section/Section';
 import Title from './Title/Title';
+import { addContact, deleteContact } from '../redux/contacts/contacts.reducer';
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -30,11 +31,7 @@ export const App = () => {
       ...contactData,
       id: nanoid(),
     };
-    const addContactAction = {
-      type: 'contacts/addContact',
-      payload: finalContact,
-    };
-    dispatch(addContactAction);
+    dispatch(addContact(finalContact));
   };
 
   // const onFilter = event => {
@@ -47,12 +44,8 @@ export const App = () => {
   //   });
   // };
 
-  const deleteContact = contactId => {
-    const deleteContactAction = {
-      type: 'contacts/deleteContact',
-      payload: contactId,
-    };
-    dispatch(deleteContactAction);
+  const handleDeleteContact = contactId => {
+    dispatch(deleteContact(contactId));
     // setContacts(contacts.filter(contact => contact.id !== contactId));
   };
 
@@ -66,8 +59,8 @@ export const App = () => {
       </Section>
       <Section>
         {/* <Filter value={filter} onChange={onFilter} /> */}
-        <ContactList contacts={contacts} deleteContact={deleteContact} />
-        <ContactList contacts={contacts} deleteContact={deleteContact} />
+        {/* <ContactList contacts={contacts} deleteContact={deleteContact} /> */}
+        <ContactList contacts={contacts} deleteContact={handleDeleteContact} />
       </Section>
     </div>
   );
