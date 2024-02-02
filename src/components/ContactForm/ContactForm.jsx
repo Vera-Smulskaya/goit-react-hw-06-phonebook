@@ -1,15 +1,33 @@
 import React, { useState } from 'react';
+import { nanoid } from 'nanoid';
 import Title from '../Title/Title';
 import css from './ContactForm.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { addContact } from '../../redux/contacts/contacts.reducer';
 
-const ContactForm = ({ handleFormContact }) => {
+const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+  const contacts = useSelector(state => state.contactsStore.contacts);
+  const dispatch = useDispatch();
+
+  const handleFormContact = (name, number) => {
+    if (contacts.find(contact => contact.name === name)) {
+      alert('This contact is already in the phonebook');
+      return;
+    }
+    const finalContacts = {
+      id: nanoid(),
+      name,
+      number,
+    };
+    dispatch(addContact(finalContacts));
+  };
 
   const handleSubmit = event => {
     event.preventDefault();
 
-    handleFormContact({ name, number });
+    handleFormContact(name, number);
 
     setName('');
     setNumber('');

@@ -1,9 +1,15 @@
 import React from 'react';
 import css from './Filter.module.css';
+import { useDispatch } from 'react-redux';
+import { filters } from '../../redux/filter/filter.reducer';
 
-const Filter = ({ value, onChange }) => {
+const Filter = ({ value }) => {
+  const dispatch = useDispatch();
+  const changeFilter = event => {
+    dispatch(filters(event.target.value));
+  };
   return (
-    <div className={css.filterContainer}>
+    <form className={css.filterContainer}>
       <label className={css.filterLabel}>
         <p className={css.filterLabelText}>Find contacts by name: </p>
         <input
@@ -11,10 +17,10 @@ const Filter = ({ value, onChange }) => {
           className={css.filterInput}
           name="filter"
           value={value}
-          onChange={onChange}
+          onChange={changeFilter}
         ></input>
       </label>
-    </div>
+    </form>
   );
 };
 
